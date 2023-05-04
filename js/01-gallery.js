@@ -1,20 +1,37 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
+
 const gallery = document.querySelector(".gallery");
-const galleryMaker = () => {
-    galleryItems.forEach(img =>
-        gallery.insertAdjacentHTML("afterbegin",
-            `<li class="gallery__item"><a class="gallery__link"><img class="gallery__image" data-source="${img.original}" scr="${img.preview}" alt="${img.description}"></a></li>`)
-    );
-};
+const galleryMarkup = galleryItems
+  .map(
+    (img) =>
+      `<li class="gallery__item">
+        <a class="gallery__link" href="${img.original}">
+          <img
+            class="gallery__image"
+            src="${img.preview}"
+            data-source="${img.original}"
+            alt="${img.description}"
+          />
+        </a>
+      </li>`
+  )
+  .join("");
+gallery.innerHTML = galleryMarkup;
 
 gallery.addEventListener("click", (event) => {
-    if (event.target.nodeName !== "A") {
+    event.preventDefault()
+    if (event.target.nodeName !== "IMG") {
         return;
     }
-
-}   
+    const instance = basicLightbox.create(`
+    <img class="modal" src="${event.target.dataset.source}" width="800" height="600">
+    `);
+    instance.show();
+}
 );
-console.log(_.add(3,4) )
-galleryMaker()
+    
+
+
 console.log(galleryItems);
+// ${event.target.dataset.source}
