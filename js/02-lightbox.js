@@ -11,12 +11,9 @@ const galleryMarkup = galleryItems
     )
   .join("");
 gallery.innerHTML = galleryMarkup;
-const lightbox = new SimpleLightbox('.gallery a', { 
+new SimpleLightbox('.gallery a', { 
     captionsData: "alt",
     captionDelay: 250
  });
-gallery.addEventListener('click', () => {
-    lightbox
-})
 console.log(galleryItems);
-// ${event.target.dataset.source}
+
